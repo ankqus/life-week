@@ -1,0 +1,96 @@
+<html>
+<head>
+	<title>My Weeks in Life</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			background-color: #f2f2f2;
+			font-family: Arial, sans-serif;
+		}
+
+		h1 {
+			text-align: center;
+			margin: 30px 0;
+		}
+
+		.container {
+			max-width: 1200px;
+			margin: 0 auto;
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			align-items: center;
+			margin-bottom: 50px; /* Add margin to bottom of container */
+		}
+
+		.row {
+			display: flex;
+			flex-wrap: wrap;
+			width: 920px;
+			margin-bottom: 2px;
+			justify-content: center; /* Align rows in center */
+		}
+
+		.box {
+			width: 10px;
+			height: 10px;
+			background-color: #d6d6d6;
+			margin: 2px;
+			border-radius: 2px;
+		}
+
+		.box.complete {
+			background-color: red;
+		}
+    .row-label {
+    width: 50px;
+    text-align: right;
+    padding-right: 10px;
+    font-size: 13px;
+    color: #666;
+}
+
+	</style>
+</head>
+<body>
+<h1 style='color:#1e2952'>Your Life in Weeks</h1>
+    <div class="container">
+        <script>
+            const birthday = new Date('2003/07/16');
+            const today = new Date();
+            const diff = today - birthday;
+            const monthEl = {value: birthday.getMonth()};
+            const dayEl = {value: birthday.getDate()};
+            var elapsedYears = (new Date(diff).getUTCFullYear() - 1970);
+            var isThisYearsBirthdayPassed = (today.getTime() > new Date(today.getUTCFullYear(), monthEl.value, dayEl.value).getTime());
+            var birthdayYearOffset = isThisYearsBirthdayPassed ? 0 : 1;
+            var dateOfLastBirthday = new Date(today.getUTCFullYear() - birthdayYearOffset, monthEl.value, dayEl.value);
+            var elapsedDaysSinceLastBirthday = Math.floor((today.getTime() - dateOfLastBirthday.getTime()) / (1000 * 60 * 60 * 24));
+            var elapsedWeeks = (elapsedYears * 52) + Math.floor(elapsedDaysSinceLastBirthday / 7);
+            const container = document.querySelector('.container');
+            for (let i = 0; i < 90; i++) { // Change to 89 columns
+                const row = document.createElement('div');
+                row.classList.add('row');
+                const rowLabel = document.createElement('div'); // Add row label
+                rowLabel.classList.add('row-label');
+                rowLabel.textContent = (i+0).toString().padStart(2, '0'); // Use a 5-digit label
+                row.appendChild(rowLabel);
+                for (let j = 0; j < 52; j++) {
+                    const box = document.createElement('div');
+                    box.classList.add('box');
+                    if ((i * 52) + j < elapsedWeeks) {
+                        box.classList.add('complete');
+                    }
+                    row.appendChild(box);
+                }
+                container.appendChild(row);
+            }
+        </script>
+    </div>
+</body>
+</html>
