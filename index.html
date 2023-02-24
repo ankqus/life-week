@@ -73,12 +73,12 @@
             var elapsedDaysSinceLastBirthday = Math.floor((today.getTime() - dateOfLastBirthday.getTime()) / (1000 * 60 * 60 * 24));
             var elapsedWeeks = (elapsedYears * 52) + Math.floor(elapsedDaysSinceLastBirthday / 7);
             const container = document.querySelector('.container');
-            for (let i = 0; i < 90; i++) { // Change to 89 columns
+            for (let i = 0; i < 90; i++) { 
                 const row = document.createElement('div');
                 row.classList.add('row');
-                const rowLabel = document.createElement('div'); // Add row label
+                const rowLabel = document.createElement('div');
                 rowLabel.classList.add('row-label');
-                rowLabel.textContent = (i+0).toString().padStart(2, '0'); // Use a 5-digit label
+                rowLabel.textContent = (i+0).toString().padStart(2, '0'); 
                 row.appendChild(rowLabel);
                 for (let j = 0; j < 52; j++) {
                     const box = document.createElement('div');
